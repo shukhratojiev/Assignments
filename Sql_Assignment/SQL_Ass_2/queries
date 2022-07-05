@@ -1,0 +1,196 @@
+select * from albums;
+select * from artists;
+select * from customers;
+select * from employees;
+select * from genres;
+select * from invoice_items;
+select * from invoices;
+select * from media_types;
+select * from playlist_track;
+select * from playlists;
+select * from tracks;
+
+-------------------------------------------------------------------------------
+
+select ar.Name as 'Artist Name',
+case 
+   when al.Title is null 
+      then 'No album' 
+   else al.Title
+end as 'Album Name'  
+from artists as ar
+left join albums as al
+on ar.ArtistId = al.ArtistId
+order by ar.Name; 
+
+--------------------------------------------------------------------------------
+
+select ar.Name as 'Artist Name', al.Title as 'Album Name'
+from artists as ar
+join albums as al
+  on ar.ArtistId = al.ArtistId
+order by al.Title desc; 
+
+---------------------------------------------------------------------------------
+
+select ar.Name as 'Artist Name'
+from artists as ar
+left join albums as al
+  on ar.ArtistId = al.ArtistId
+where al.Title is null
+order by ar.Name;
+
+
+--------------------------------------------------------------------------------
+
+
+select ar.Name as 'Artist Name', count(ar.Name) as 'No of albums'
+from artists as ar
+join albums as al
+  on ar.ArtistId = al.ArtistId
+group by ar.Name
+order by count(ar.Name) desc, ar.Name;   
+
+
+
+-----------------------------------------------------------------------------------
+
+
+
+select ar.Name as 'Artist Name', count(ar.Name) as 'No of Albums'
+from artists as ar
+join albums as al
+  on ar.ArtistId = al.ArtistId 
+group by ar.Name
+having count(ar.Name) >=10
+order by count(ar.Name) desc, ar.Name;
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+select ar.Name as 'Artist Name', count(ar.Name) as 'No of Albums'
+from artists as ar
+join albums as al
+  on ar.ArtistId = al.ArtistId 
+group by ar.Name
+order by count(ar.Name) desc, ar.Name
+limit 3;
+
+
+--------------------------------------------------------------------------------------
+
+
+select ar.Name as 'Artist Name', al.Title as 'Album Name', tr.Name as 'Tracks'
+from artists as ar
+join albums as al
+  on ar.ArtistId = al.ArtistId
+join tracks tr
+  on tr.AlbumId = al.AlbumId
+where ar.Name = 'Santana'
+order by tr.TrackId;
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+select e.EmployeeId as 'Employee Id',
+       e.FirstName || ' ' || e.LastName as 'Employee Name', 
+       e.Title as 'Employee Title',
+       e.ReportsTo as 'Manager Id', 
+       em.FirstName || ' ' || em.LastName as 'Manager Name', 
+       em.Title as 'Manager title'
+from employees as e
+join employees as em
+  on e.ReportsTo = em.EmployeeId
+order by e.EmployeeId;
+
+
+
+
+-------------------------------------------------------------------------------------------
+
+create view top_employees
+as
+select e.EmployeeId as emp_id, e.FirstName || ' ' || e.LastName as emp_name, count(e.EmployeeId) as cust_count  
+from employees e
+join customers c
+  on e.EmployeeId = c.SupportRepId
+group by e.EmployeeId;
+
+
+select * from top_employees;
+
+
+select te.emp_name, c.FirstName || ' ' || c.LastName as cus_name 
+from top_employees te
+join customers c
+  on te.emp_id = c.SupportRepId
+where te.emp_id = (select emp_id
+                   from top_employees
+                   order by cust_count desc
+                   limit 1);
+
+
+----------------------------------------------------------------------------------------------------
+
+
+insert into media_types(Name) values('MP3');
+
+create trigger prevent_MP3 
+before insert
+on tracks
+when NEW.MediaTypeId=6
+begin
+   select raise(abort,'You can not insert MP3 type');
+end;   
+
+
+insert into tracks (Name,AlbumId,MediaTypeId,GenreId,Composer,Milliseconds,Bytes,UnitPrice) values ('something',2,6,1,'someone',21313,122323,0.99);
+
+select * from media_types;
+
+
+--------------------------------------------------------------------------------------------------
+
+
+create table tracks_audit_log (operation nvachar(20), time text, username nvarchar(50));
+
+
+--trigger for insertion
+create trigger tracks_audit_insert
+after insert
+on tracks
+begin
+   insert into tracks_audit_log values('insert',datetime('now'), 'username');
+end;
+
+--trigger for update
+create trigger tracks_audit_update
+after update
+on tracks
+begin
+   insert into tracks_audit_log values('update',datetime('now'), 'username');
+end;
+
+
+
+--trigger for deletion
+create trigger tracks_audit_delete
+after delete
+on tracks
+begin
+   insert into tracks_audit_log values('delete',datetime('now'), 'username');
+end;
+
+
+insert into tracks (Name,AlbumId,MediaTypeId,GenreId,Composer,Milliseconds,Bytes,UnitPrice) values ('something',2,2,1,'someone',21313,122323,0.99);
+update tracks set Name='Someone else' where Trackid=1;
+delete from tracks where TrackId=3515;
+
+select * from tracks_audit_log;
