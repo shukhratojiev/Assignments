@@ -1,0 +1,701 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    API design for project
+  version: 1.0.0
+  title: Recruiting site
+  contact:
+    name: Shukhrat
+host: virtserver.swaggerhub.com
+basePath: /shukhratojiev/DemoAPI/1.0.0
+tags:
+- name: adminstrator
+  description: Everything about admin
+- name: recruiter
+  description: Everything about recruiter
+- name: sourcer
+  description: Everything about sourcer
+- name: projectManager
+  description: Everything about projectManager
+- name: technicalInterviewer
+  description: Everything about technicalInterviewer
+- name: managementInterviewer
+  description: Everything about managementInterviewer
+schemes:
+- https
+- http
+paths:
+  /adminstrator/login:
+    get:
+      tags:
+      - adminstrator
+      summary: Logs adminstrator into the system
+      operationId: loginAdminstrator
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The username for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /adminstrator/addUser:
+    post:
+      tags:
+      - adminstrator
+      summary: Adds new user
+      description: descr
+      operationId: addUser
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Created user object
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        default:
+          description: successful operation
+  /adminstrator/addRole:
+    post:
+      tags:
+      - adminstrator
+      summary: Adds new role
+      description: descr
+      operationId: addRole
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Created user object
+        required: true
+        schema:
+          $ref: '#/definitions/Role'
+      responses:
+        default:
+          description: successful operation
+        "400":
+          description: Invalid role name
+  /adminstrator/addProject:
+    post:
+      tags:
+      - adminstrator
+      summary: Adds new role
+      description: descr
+      operationId: addProject
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Created user object
+        required: true
+        schema:
+          $ref: '#/definitions/Project'
+      responses:
+        default:
+          description: successful operation
+        "400":
+          description: Invalid project name
+  /adminstrator/logout:
+    get:
+      tags:
+      - adminstrator
+      summary: Logs out current logged in adminstrator session
+      operationId: logoutAdminstrator
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /recruiter/login:
+    get:
+      tags:
+      - recruiter
+      summary: Logs recruiter into the system
+      operationId: loginRecruiter
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The username for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /recruiter/addOpenPosition:
+    post:
+      tags:
+      - recruiter
+      summary: Adds new open position
+      description: descr
+      operationId: addPosition
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Created user object
+        required: true
+        schema:
+          $ref: '#/definitions/Position'
+      responses:
+        default:
+          description: successful operation
+        "400":
+          description: Invalid input
+  /recruiter/updateOpenPosition{positionid}:
+    put:
+      tags:
+      - recruiter
+      summary: Updated Position
+      description: This can only be done by the logged in user.
+      operationId: updatePosition
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: positionid
+        in: path
+        description: name that need to be updated
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Updated position object
+        required: true
+        schema:
+          $ref: '#/definitions/Position'
+      responses:
+        "400":
+          description: Invalid input supplied
+        "404":
+          description: Position not found
+  /recruiter/deleteOpenPosition/{positionid}:
+    delete:
+      tags:
+      - recruiter
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      produces:
+      - application/json
+      parameters:
+      - name: positionid
+        in: path
+        description: The id of position that needs to be deleted
+        required: true
+        type: integer
+      responses:
+        "400":
+          description: Invalid id supplied
+        "404":
+          description: Position not found
+  /recruiter/logout:
+    get:
+      tags:
+      - recruiter
+      summary: Logs out current logged in recruiter session
+      operationId: logoutRecruiter
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /sourcer/login:
+    get:
+      tags:
+      - sourcer
+      summary: Logs sourcer into the system
+      operationId: loginSoucer
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The username for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /sourcer/addCandidate:
+    post:
+      tags:
+      - sourcer
+      summary: Adds new candidate
+      description: descr
+      operationId: addCandidate
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Created candidate object
+        required: true
+        schema:
+          $ref: '#/definitions/Candidate'
+      responses:
+        default:
+          description: successful operation
+        "400":
+          description: Invalid input
+  /sourcer/updateCandidate/{candidateid}:
+    put:
+      tags:
+      - sourcer
+      summary: Updated Candidate
+      description: This can only be done by the logged in user.
+      operationId: updateCandidate
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: candidateid
+        in: path
+        description: name that need to be updated
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Updated position object
+        required: true
+        schema:
+          $ref: '#/definitions/Candidate'
+      responses:
+        "400":
+          description: Invalid input supplied
+        "404":
+          description: Position not found
+  /sourcer/deleteCandidate/{positionid}:
+    delete:
+      tags:
+      - sourcer
+      summary: Delete candidate
+      description: This can only be done by the logged in user.
+      operationId: deleteCandidate
+      produces:
+      - application/json
+      parameters:
+      - name: positionid
+        in: path
+        description: The id of position that needs to be deleted
+        required: true
+        type: integer
+      responses:
+        "400":
+          description: Invalid id supplied
+        "404":
+          description: Position not found
+  /sourcer/logout:
+    get:
+      tags:
+      - sourcer
+      summary: Logs out current logged in Sourcer session
+      operationId: logoutSourcer
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /projectManager/login:
+    get:
+      tags:
+      - projectManager
+      summary: Logs Project Manager into the system
+      operationId: loginProjectManager
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The username for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /projectManager/candidates/{positionid}:
+    get:
+      tags:
+      - projectManager
+      summary: Get candidates for project assigned
+      operationId: getCandidates
+      produces:
+      - application/json
+      parameters:
+      - name: positionid
+        in: path
+        description: Id for position
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Candidate'
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: Candidates not found
+  /projectManager/assignManagementInterviewer:
+    post:
+      tags:
+      - projectManager
+      summary: Assign Management Interviewer for candidate
+      description: ' '
+      operationId: assignManagement
+      produces:
+      - application/json
+      parameters:
+      - name: tags
+        in: query
+        description: Tags to filter by
+        required: true
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Interview'
+        "400":
+          description: Invalid tag value
+  /projectManager/logout:
+    get:
+      tags:
+      - projectManager
+      summary: Logs out current logged in user session
+      operationId: logoutProjectManager
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /technicalInterviewer/login:
+    get:
+      tags:
+      - technicalInterviewer
+      summary: Logs Technical Interviewer into the system
+      operationId: loginTechnicalInterviewer
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The username for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /technicalInterviewer/interview:
+    get:
+      tags:
+      - technicalInterviewer
+      summary: Checks assigned interviews
+      operationId: technicalInterview
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Interview'
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: Candidates not found
+  /technicalInterviewer/logout:
+    get:
+      tags:
+      - technicalInterviewer
+      summary: Logs out current logged in Technical Interviewer session
+      operationId: logoutTechnicalInterviewer
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /managementInterviewer/login:
+    get:
+      tags:
+      - managementInterviewer
+      summary: Logs Management Interviewer into the system
+      operationId: loginManagementInterviewer
+      produces:
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The user name for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /managementInterviewer/interview:
+    get:
+      tags:
+      - managementInterviewer
+      summary: Checks assigned interviews
+      operationId: managementInterview
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Interview'
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: Candidates not found
+  /managementInterviewer/logout:
+    get:
+      tags:
+      - managementInterviewer
+      summary: Logs out current logged in Management Interviewer session
+      operationId: logoutManagementInterviewer
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: User
+  Candidate:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: Candidate
+  Position:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        type: integer
+        format: int32
+        description: User Status
+    xml:
+      name: Position
+  Role:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      rolename:
+        type: string
+    xml:
+      name: Role
+  Interview:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      rolename:
+        type: string
+    xml:
+      name: Interview
+  Project:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      rolename:
+        type: string
+    xml:
+      name: Project
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
