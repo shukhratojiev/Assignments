@@ -6,7 +6,6 @@ info:
   contact:
     name: Shukhrat
     email: 'shukhrat.tojiev@mail.ru'
-basePath: "api/v2"
 tags:
 - name: users
   description: Operations on users
@@ -22,13 +21,10 @@ tags:
   description: Operations on manager
 - name: interviews
   description: Operations on interview
-- name: Technical interviewer
+- name: Technical Interviewer
   description: Operations on Technical interviewer  
-- name: Management interviewer
+- name: Management Interviewer
   description: Operations on Management interviewer 
-schemes:
-- "https"
-- "http"
 paths:
   /users:
     get:
@@ -41,11 +37,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/User"
+                  $ref: "#/components/schemas/UserList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  users
@@ -56,18 +50,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/UserNoId"
+              $ref: "#/components/schemas/UserNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/User"
+                $ref: "#/components/schemas/User"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /users/{id}:
     get:
       tags:
@@ -87,11 +81,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/User"
+                $ref: "#/components/schemas/User"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  users
@@ -110,18 +104,18 @@ paths:
         content: 
           application/json:
             schema:
-             $ref: "#/Components/requestBodies/UserNoId"  
+             $ref: "#/components/schemas/UserNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/User"
+                $ref: "#/components/schemas/User"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  users
@@ -136,11 +130,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
   
   
   /roles:
@@ -154,11 +148,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Role"
+                  $ref: "#/components/schemas/RoleList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  roles
@@ -169,18 +161,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/RoleNoId"
+              $ref: "#/components/schemas/RoleNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Role"
+                $ref: "#/components/schemas/Role"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /roles/{id}:
     get:
       tags:
@@ -200,11 +192,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Role"
+                $ref: "#/components/schemas/Role"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  roles
@@ -223,18 +215,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/RoleNoId"  
+              $ref: "#/components/schemas/RoleNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Role"
+                $ref: "#/components/schemas/Role"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  roles
@@ -249,11 +241,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
 
   /projects:
     get:
@@ -266,11 +258,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Project"
+                  $ref: "#/components/schemas/ProjectList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  projects
@@ -281,18 +271,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/ProjectNoId"
+              $ref: "#/components/schemas/ProjectNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Project"
+                $ref: "#/components/schemas/Project"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /projects/{id}:
     get:
       tags:
@@ -312,11 +302,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Project"
+                $ref: "#/components/schemas/Project"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  projects
@@ -335,18 +325,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/ProjectNoId"  
+              $ref: "#/components/schemas/ProjectNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Project"
+                $ref: "#/components/schemas/Project"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  projects
@@ -361,11 +351,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
 
   /positions:
     get:
@@ -378,11 +368,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Position"
+                  $ref: "#/components/schemas/PositionList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  positions
@@ -393,18 +381,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/PositionNoId"
+              $ref: "#/components/schemas/PositionNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Position"
+                $ref: "#/components/schemas/Position"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /positions/{id}:
     get:
       tags:
@@ -424,11 +412,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Position"
+                $ref: "#/components/schemas/Position"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  positions
@@ -447,18 +435,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/PositionNoId"  
+              $ref: "#/components/schemas/PositionNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Position"
+                $ref: "#/components/schemas/Position"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  positions
@@ -473,11 +461,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
   /positions/{id}/candidates:
     get:
       tags:
@@ -497,11 +485,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Candidate"
+                  $ref: "#/components/schemas/CandidateList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  candidates
@@ -520,18 +506,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/CandidateNoId"
+              $ref: "#/components/schemas/CandidateNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /positions/{positionId}/candidates/{candidateId}:
     get:
       tags:
@@ -558,11 +544,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  candidates
@@ -588,18 +574,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/CandidateNoId" 
+              $ref: "#/components/schemas/CandidateNoId" 
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  candidates
@@ -621,11 +607,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     patch:
       tags:
       -  manager
@@ -659,11 +645,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
   /interviews:
     get:
       tags:
@@ -675,11 +661,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Interview"
+                  $ref: "#/components/schemas/InterviewList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  interviews
@@ -690,18 +674,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/InterviewNoId"
+              $ref: "#/components/schemas/InterviewNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Interview"
+                $ref: "#/components/schemas/Interview"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /interviews/{id}:
     get:
       tags:
@@ -721,11 +705,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Interview"
+                $ref: "#/components/schemas/Interview"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  interviews
@@ -744,18 +728,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/InterviewNoId" 
+              $ref: "#/components/schemas/InterviewNoId" 
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Interview"
+                $ref: "#/components/schemas/Interview"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  interviews
@@ -770,11 +754,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"        
+          $ref: "#/components/responses/404"        
   /candidates:
     get:
       tags:
@@ -786,11 +770,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/Candidate"
+                  $ref: "#/components/schemas/CandidateList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
   /candidates/{id}:
     get:
       tags:
@@ -810,11 +792,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
   /candidates/{candidateId}/managementInterviewer/{interviewerId}:   
     put:
       tags:
@@ -841,18 +823,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/CandidateNoId" 
+              $ref: "#/components/schemas/CandidateNoId" 
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/Candidate"
+                $ref: "#/components/schemas/Candidate"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
   /technicalDocument:
     get:
       tags:
@@ -864,11 +846,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/TechnicalDocument"
+                  $ref: "#/components/schemas/TechnicalList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  Technical Interviewer
@@ -879,18 +859,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/TechnicalDocumentNoId"
+              $ref: "#/components/schemas/TechnicalDocumentNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/TechnicalDocument"
+                $ref: "#/components/schemas/TechnicalDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /technicalDocument/{id}:
     get:
       tags:
@@ -910,11 +890,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/TechnicalDocument"
+                $ref: "#/components/schemas/TechnicalDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  Technical Interviewer
@@ -933,18 +913,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/TechnicalDocumentNoId"  
+              $ref: "#/components/schemas/TechnicalDocumentNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/TechnicalDocument"
+                $ref: "#/components/schemas/TechnicalDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  Technical Interviewer
@@ -959,11 +939,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     patch:
       tags:
       -  manager
@@ -990,11 +970,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/TechnicalDocument"
+                $ref: "#/components/schemas/TechnicalDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"      
+          $ref: "#/components/responses/404"      
   /managementDocument:
     get:
       tags:
@@ -1006,11 +986,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/Components/Schemas/ManagementDocument"
+                  $ref: "#/components/schemas/ManagementList"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     post:
       tags:
       -  Management Interviewer
@@ -1021,18 +999,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/ManagementDocumentNoId"
+              $ref: "#/components/schemas/ManagementDocumentNoId"
       responses:
         201:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/ManagementDocument"
+                $ref: "#/components/schemas/ManagementDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         501:
-          $ref: "#/Components/responses/500"
+          $ref: "#/components/responses/500"
   /managementDocument/{id}:
     get:
       tags:
@@ -1052,11 +1030,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/ManagementDocument"
+                $ref: "#/components/schemas/ManagementDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"  
+          $ref: "#/components/responses/404"  
     put:
       tags:
       -  Management Interviewer
@@ -1075,18 +1053,18 @@ paths:
         content: 
           application/json:
             schema:
-              $ref: "#/Components/requestBodies/ManagementDocumentNoId"  
+              $ref: "#/components/schemas/ManagementDocumentNoId"  
       responses:
         200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/ManagementDocument"
+                $ref: "#/components/schemas/ManagementDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"
+          $ref: "#/components/responses/404"
     delete:
       tags:
       -  Management Interviewer
@@ -1101,11 +1079,11 @@ paths:
           example: 7
       responses:
         204:
-          $ref: "#/Components/responses/204" 
+          $ref: "#/components/responses/204" 
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404" 
+          $ref: "#/components/responses/404" 
     patch:
       tags:
       -  manager
@@ -1132,14 +1110,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/Components/Schemas/ManagementDocument"
+                $ref: "#/components/schemas/ManagementDocument"
         400:
-          $ref: "#/Components/responses/400"
+          $ref: "#/components/responses/400"
         404:
-          $ref: "#/Components/responses/404"      
+          $ref: "#/components/responses/404"      
           
-Components:
-  Schemas:
+components:
+  schemas:
     User:
       type: object
       properties: 
@@ -1222,7 +1200,7 @@ Components:
           type: string
           example: PositionName
         CV:
-          type: file
+          type: object
           example: cv.pdf
         status:
           type: string
@@ -1258,15 +1236,15 @@ Components:
         validationByManager:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
         validationByRecruiter:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
     ManagementDocument:
       type: object
       properties:
@@ -1279,17 +1257,15 @@ Components:
         validationByManager:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
         validationByRecruiter:
           type: string
           enum:
-              validated
-              in progress
-              rejected
-
-  requestBodies:
+            - validated
+            - in progress
+            - rejected
     UserNoId:
       type: object
       properties: 
@@ -1357,7 +1333,7 @@ Components:
           type: string
           example: PositionName
         CV:
-          type: file
+          type: object
           example: cv.pdf
         status:
           type: string
@@ -1387,15 +1363,15 @@ Components:
         validationByManager:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
         validationByRecruiter:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
     ManagementDocumentNoId:
       type: object
       properties:
@@ -1405,17 +1381,73 @@ Components:
         validationByManager:
           type: string
           enum:
-              validated
-              in progress
-              rejected
+            - validated
+            - in progress
+            - rejected
         validationByRecruiter:
           type: string
           enum:
-              validated
-              in progress
-              rejected      
+            - validated
+            - in progress
+            - rejected   
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+    RoleList:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Role"
+    ProjectList:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+    PositionList:
+      type: object
+      properties:
+        positions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Position" 
+    CandidateList:
+      type: object
+      properties:
+        candidates:
+          type: array
+          items:
+            $ref: "#/components/schemas/Candidate"
+    InterviewList:
+      type: object
+      properties:
+        interviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Interview"
+    TechnicalList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/TechnicalDocument"
+    ManagementList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/ManagementDocument"        
+            
 
-  securitySchemas:
   
   responses:
     400:
